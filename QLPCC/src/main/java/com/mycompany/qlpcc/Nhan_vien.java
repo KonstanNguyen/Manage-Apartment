@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.qlpcc;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +12,8 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,6 +30,9 @@ public class Nhan_vien extends javax.swing.JFrame {
         //new Dang_nhap();
         this.ma_nhan_vien = ma_nhan_vien;
       
+        layDichVu();
+        layCanHo();
+        layDataComboBox();
     }
 
     /**
@@ -41,7 +45,11 @@ public class Nhan_vien extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup_Phai = new javax.swing.ButtonGroup();
-        panel_dichvu = new javax.swing.JTabbedPane();
+        panel_tab_dichvu = new javax.swing.JTabbedPane();
+        TabbedPane_Nhanvien = new javax.swing.JTabbedPane();
+        panel_canho = new javax.swing.JPanel();
+        ScrollPane_canho = new javax.swing.JScrollPane();
+        table_canho = new javax.swing.JTable();
         Panel_Thongtin = new javax.swing.JPanel();
         Label_manhanvien = new javax.swing.JLabel();
         Label_hoten = new javax.swing.JLabel();
@@ -93,6 +101,27 @@ public class Nhan_vien extends javax.swing.JFrame {
         ComboBox_Canho = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        panel_dichvu = new javax.swing.JPanel();
+        ScrollPane_dichvu = new javax.swing.JScrollPane();
+        table_dichvu = new javax.swing.JTable();
+        TabbedPane_hieuchinhdv = new javax.swing.JTabbedPane();
+        panel_xoadv = new javax.swing.JPanel();
+        label_madv_xoa = new javax.swing.JLabel();
+        text_madv_xoa = new javax.swing.JTextField();
+        button_xoadv = new javax.swing.JButton();
+        label_tendv_xoa = new javax.swing.JLabel();
+        ComboBox_tendv_xoa = new javax.swing.JComboBox<>();
+        panel_themsuadv = new javax.swing.JPanel();
+        label_tendv = new javax.swing.JLabel();
+        label_dongia = new javax.swing.JLabel();
+        label_vat = new javax.swing.JLabel();
+        label_donvi = new javax.swing.JLabel();
+        text_tendv = new javax.swing.JTextField();
+        text_vat = new javax.swing.JTextField();
+        text_dongia = new javax.swing.JTextField();
+        text_donvi = new javax.swing.JTextField();
+        button_themdv = new javax.swing.JButton();
+        button_suadv = new javax.swing.JButton();
         Button_Dangxuat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,6 +145,34 @@ public class Nhan_vien extends javax.swing.JFrame {
                 Panel_ThongtinMouseEntered(evt);
             }
         });
+        table_canho.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã căn hộ", "Diện tích", "Mã chủ sở hữu", "Chủ sở hữu", "Khu", "Tầng"
+            }
+        ));
+        ScrollPane_canho.setViewportView(table_canho);
+
+        javax.swing.GroupLayout panel_canhoLayout = new javax.swing.GroupLayout(panel_canho);
+        panel_canho.setLayout(panel_canhoLayout);
+        panel_canhoLayout.setHorizontalGroup(
+            panel_canhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ScrollPane_canho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+        );
+        panel_canhoLayout.setVerticalGroup(
+            panel_canhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_canhoLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(ScrollPane_canho, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        TabbedPane_Nhanvien.addTab("Thòng tin căn hộ", panel_canho);
 
         Label_manhanvien.setText("Mã nhân viên");
 
@@ -143,6 +200,7 @@ public class Nhan_vien extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ThongtinLayout.createSequentialGroup()
                         .addComponent(Label_tendangnhap)
                         .addGap(24, 24, 24))
+                    .addComponent(Label_phongban, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(Panel_ThongtinLayout.createSequentialGroup()
                         .addGroup(Panel_ThongtinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Label_phai, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,7 +260,7 @@ public class Nhan_vien extends javax.swing.JFrame {
                 .addGap(73, 73, 73))
         );
 
-        panel_dichvu.addTab("Thông tin", Panel_Thongtin);
+        panel_tab_dichvu.addTab("Thông tin", Panel_Thongtin);
 
         Panel_quanlytaikhoan.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -411,7 +469,7 @@ public class Nhan_vien extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panel_dichvu.addTab("Quản lý tài khoản", Panel_quanlytaikhoan);
+        panel_tab_dichvu.addTab("Quản lý tài khoản", Panel_quanlytaikhoan);
 
         Panel_Thongke.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -485,7 +543,7 @@ public class Nhan_vien extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panel_dichvu.addTab("Thống kê", Panel_Thongke);
+        panel_tab_dichvu.addTab("Thống kê", Panel_Thongke);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -498,7 +556,7 @@ public class Nhan_vien extends javax.swing.JFrame {
             .addGap(0, 443, Short.MAX_VALUE)
         );
 
-        panel_dichvu.addTab("Thông tin căn hộ", jPanel1);
+        panel_tab_dichvu.addTab("Thông tin căn hộ", jPanel1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -511,7 +569,197 @@ public class Nhan_vien extends javax.swing.JFrame {
             .addGap(0, 443, Short.MAX_VALUE)
         );
 
-        panel_dichvu.addTab("Dịch vụ", jPanel2);
+        panel_tab_dichvu.addTab("Dịch vụ", jPanel2);
+
+        table_dichvu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Mã dịch vụ", "Tên dịch vụ", "VAT", "Đơn giá", "Đơn vị"
+            }
+        ));
+        table_dichvu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_dichvuMouseClicked(evt);
+            }
+        });
+        ScrollPane_dichvu.setViewportView(table_dichvu);
+
+        label_madv_xoa.setText("Mã dịch vụ");
+
+        button_xoadv.setText("Xóa");
+        button_xoadv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_xoadvActionPerformed(evt);
+            }
+        });
+
+        label_tendv_xoa.setText("Tên dịch vụ");
+
+        javax.swing.GroupLayout panel_xoadvLayout = new javax.swing.GroupLayout(panel_xoadv);
+        panel_xoadv.setLayout(panel_xoadvLayout);
+        panel_xoadvLayout.setHorizontalGroup(
+            panel_xoadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_xoadvLayout.createSequentialGroup()
+                .addGroup(panel_xoadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_xoadvLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(button_xoadv))
+                    .addGroup(panel_xoadvLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(panel_xoadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(label_madv_xoa)
+                            .addComponent(label_tendv_xoa, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel_xoadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(text_madv_xoa, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(ComboBox_tendv_xoa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        panel_xoadvLayout.setVerticalGroup(
+            panel_xoadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_xoadvLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(panel_xoadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(text_madv_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_madv_xoa))
+                .addGap(18, 18, 18)
+                .addGroup(panel_xoadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_tendv_xoa)
+                    .addComponent(ComboBox_tendv_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(button_xoadv)
+                .addGap(26, 26, 26))
+        );
+
+        TabbedPane_hieuchinhdv.addTab("Xóa", panel_xoadv);
+
+        label_tendv.setText("Tên dịch vụ");
+
+        label_dongia.setText("Đơn giá");
+
+        label_vat.setText("VAT");
+
+        label_donvi.setText("Đơn vị");
+
+        text_tendv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_tendvActionPerformed(evt);
+            }
+        });
+
+        text_vat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_vatActionPerformed(evt);
+            }
+        });
+
+        text_dongia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_dongiaActionPerformed(evt);
+            }
+        });
+
+        button_themdv.setText("Thêm");
+        button_themdv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_themdvActionPerformed(evt);
+            }
+        });
+
+        button_suadv.setText("Sửa");
+        button_suadv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_suadvActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_themsuadvLayout = new javax.swing.GroupLayout(panel_themsuadv);
+        panel_themsuadv.setLayout(panel_themsuadvLayout);
+        panel_themsuadvLayout.setHorizontalGroup(
+            panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_themsuadvLayout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_themsuadvLayout.createSequentialGroup()
+                        .addGroup(panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_tendv)
+                            .addComponent(label_donvi)
+                            .addComponent(label_vat)
+                            .addComponent(label_dongia))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(text_tendv)
+                            .addComponent(text_vat)
+                            .addComponent(text_dongia)
+                            .addComponent(text_donvi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_themsuadvLayout.createSequentialGroup()
+                        .addComponent(button_themdv)
+                        .addGap(18, 18, 18)
+                        .addComponent(button_suadv, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))))
+        );
+        panel_themsuadvLayout.setVerticalGroup(
+            panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_themsuadvLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_tendv)
+                    .addComponent(text_tendv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_vat)
+                    .addComponent(text_vat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_dongia)
+                    .addComponent(text_dongia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_donvi)
+                    .addComponent(text_donvi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_themsuadvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button_themdv)
+                    .addComponent(button_suadv))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        TabbedPane_hieuchinhdv.addTab("Thêm/Sửa", panel_themsuadv);
+
+        javax.swing.GroupLayout panel_dichvuLayout = new javax.swing.GroupLayout(panel_dichvu);
+        panel_dichvu.setLayout(panel_dichvuLayout);
+        panel_dichvuLayout.setHorizontalGroup(
+            panel_dichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_dichvuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TabbedPane_hieuchinhdv, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollPane_dichvu, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panel_dichvuLayout.setVerticalGroup(
+            panel_dichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_dichvuLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(panel_dichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TabbedPane_hieuchinhdv, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ScrollPane_dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        TabbedPane_Nhanvien.addTab("Dịch vụ", panel_dichvu);
 
         Button_Dangxuat.setText("Đăng xuất");
         Button_Dangxuat.addActionListener(new java.awt.event.ActionListener() {
@@ -530,16 +778,17 @@ public class Nhan_vien extends javax.swing.JFrame {
                 .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel_dichvu)
+                .addComponent(panel_tab_dichvu)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Button_Dangxuat)
                 .addGap(18, 18, 18)
-                .addComponent(panel_dichvu))
+                .addComponent(panel_tab_dichvu))
+                .addComponent(TabbedPane_Nhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -908,6 +1157,173 @@ public class Nhan_vien extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_Panel_ThongkeAncestorMoved
+    private void button_suadvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_suadvActionPerformed
+
+        Connection ketNoi = KetNoiDB.KetNoi();
+
+        String ma_dv, ten_dv, vat, don_gia, don_vi;
+        ma_dv = text_madv_xoa.getText();
+        ten_dv = text_tendv.getText();
+        vat = text_vat.getText();
+        don_gia = text_dongia.getText();
+        don_vi = text_donvi.getText();
+
+        if (ma_dv.isEmpty() || ten_dv.isEmpty() || vat.isEmpty() || don_gia.isEmpty() || don_vi.isEmpty() ) {
+            JOptionPane.showMessageDialog(this, "Hay nhap du thong tin!");
+        }
+        else {
+            try {
+                //PreparedStatement ps = ketNoi.prepareStatement(sql);
+                //ResultSet rs = ps.executeQuery();
+                Statement ps = ketNoi.createStatement();
+
+                String sql = "UPDATE DICH_VU SET ten_dich_vu = '%s', vat = '%s', don_gia = '%s', don_vi = '%s' WHERE ma_dich_vu = '%s';";
+                sql = String.format(sql, ten_dv, vat, don_gia, don_vi, ma_dv);
+                ps.executeUpdate(sql);
+
+                DefaultTableModel dtm = (DefaultTableModel) table_dichvu.getModel();
+                dtm.setRowCount(0);
+
+                layDichVu();
+
+                JOptionPane.showMessageDialog(this, "Sua thanh cong!");
+
+                text_madv_xoa.setText("");
+                text_tendv.setText("");
+                text_vat.setText("");
+                text_dongia.setText("");
+                text_donvi.setText("");
+
+                ps.close();
+                ketNoi.close();
+            }
+            catch (SQLException ex) {
+                ex.printStackTrace();
+                System.out.println("Loi khi doc du lieu");
+            }
+        }
+    }//GEN-LAST:event_button_suadvActionPerformed
+
+    private void button_themdvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_themdvActionPerformed
+
+        Connection ketNoi = KetNoiDB.KetNoi();
+
+        String ma_dv, ten_dv, vat, don_gia, don_vi;
+        int h = ComboBox_tendv_xoa.getItemCount() + 1;
+        ma_dv = "DV" + h;
+        System.out.println(ma_dv);
+        ten_dv = text_tendv.getText();
+        vat = text_vat.getText();
+        don_gia = text_dongia.getText();
+        don_vi = text_donvi.getText();
+
+        if (ma_dv.isEmpty() || ten_dv.isEmpty() || vat.isEmpty() || don_gia.isEmpty() || don_vi.isEmpty() ) {
+            JOptionPane.showMessageDialog(this, "Hay nhap du thong tin!");
+        }
+        else {
+            try {
+                //PreparedStatement ps = ketNoi.prepareStatement(sql);
+                //ResultSet rs = ps.executeQuery();
+                Statement ps = ketNoi.createStatement();
+
+                String sql = "INSERT INTO DICH_VU (ma_dich_vu, ten_dich_vu, vat, don_gia, don_vi) VALUES ('%s' , '%s', '%s', '%s', '%s');";
+                sql = String.format(sql, ma_dv, ten_dv, vat, don_gia, don_vi);
+                ps.executeUpdate(sql);
+
+                DefaultTableModel dtm = (DefaultTableModel) table_dichvu.getModel();
+                dtm.setRowCount(0);
+
+                layDichVu();
+                ComboBox_tendv_xoa.addItem(ten_dv);
+
+                JOptionPane.showMessageDialog(this, "Them thanh cong!");
+
+                text_madv_xoa.setText("");
+                text_tendv.setText("");
+                text_vat.setText("");
+                text_dongia.setText("");
+                text_donvi.setText("");
+
+                ps.close();
+                ketNoi.close();
+            }
+            catch (SQLException ex) {
+                ex.printStackTrace();
+                System.out.println("Loi khi doc du lieu");
+            }
+        }
+    }//GEN-LAST:event_button_themdvActionPerformed
+
+    private void text_dongiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_dongiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_dongiaActionPerformed
+
+    private void text_vatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_vatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_vatActionPerformed
+
+    private void text_tendvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_tendvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_text_tendvActionPerformed
+
+    private void button_xoadvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_xoadvActionPerformed
+
+        Connection ketNoi = KetNoiDB.KetNoi();
+
+        String ma_dv;
+        ma_dv = text_madv_xoa.getText();
+
+        if (ma_dv.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Hay nhap ma dich vu!");
+        }
+        else {
+            try {
+                //PreparedStatement ps = ketNoi.prepareStatement(sql);
+                //ResultSet rs = ps.executeQuery();
+                Statement ps = ketNoi.createStatement();
+
+                String sql = "DELETE FROM DICH_VU WHERE ma_dich_vu ='%s';";
+                sql = String.format(sql, ma_dv);
+                ps.executeUpdate(sql);
+
+                DefaultTableModel dtm = (DefaultTableModel) table_dichvu.getModel();
+                dtm.setRowCount(0);
+
+                layDichVu();
+                ComboBox_tendv_xoa.removeAllItems();
+                layDataComboBox();
+
+                JOptionPane.showMessageDialog(this, "Xoa thanh cong!");
+
+                text_madv_xoa.setText("");
+                ComboBox_tendv_xoa.setSelectedIndex(-1);
+                text_tendv.setText("");
+                text_vat.setText("");
+                text_dongia.setText("");
+                text_donvi.setText("");
+
+                ps.close();
+                ketNoi.close();
+            }
+            catch (SQLException ex) {
+                ex.printStackTrace();
+                System.out.println("Loi khi doc du lieu");
+            }
+        }
+    }//GEN-LAST:event_button_xoadvActionPerformed
+
+    private void table_dichvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_dichvuMouseClicked
+        DefaultTableModel dtm = (DefaultTableModel) table_dichvu.getModel();
+
+        int selecteRowIndex = table_dichvu.getSelectedRow();
+
+        text_madv_xoa.setText(dtm.getValueAt(selecteRowIndex, 0).toString());
+        text_tendv.setText(dtm.getValueAt(selecteRowIndex, 1).toString());
+        ComboBox_tendv_xoa.setSelectedItem(dtm.getValueAt(selecteRowIndex, 1).toString());
+        text_vat.setText(dtm.getValueAt(selecteRowIndex, 2).toString());
+        text_dongia.setText(dtm.getValueAt(selecteRowIndex, 3).toString());
+        text_donvi.setText(dtm.getValueAt(selecteRowIndex, 4).toString());
+    }//GEN-LAST:event_table_dichvuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -958,6 +1374,7 @@ public class Nhan_vien extends javax.swing.JFrame {
     private javax.swing.JLabel Label_Phai;
     private javax.swing.JLabel Label_Sdt;
     private javax.swing.JLabel Label_Tendangnhap;
+    private javax.swing.JComboBox<String> ComboBox_tendv_xoa;
     private javax.swing.JLabel Label_cccd;
     private javax.swing.JLabel Label_hiencccd;
     private javax.swing.JLabel Label_hienhoten;
@@ -999,7 +1416,7 @@ public class Nhan_vien extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane panel_dichvu;
+    private javax.swing.JTabbedPane panel_tab_dichvu;
     // End of variables declaration//GEN-END:variables
     
     public void in_csh(){
@@ -1037,4 +1454,117 @@ public class Nhan_vien extends javax.swing.JFrame {
     
     
     
+    private javax.swing.JScrollPane ScrollPane_canho;
+    private javax.swing.JScrollPane ScrollPane_dichvu;
+    private javax.swing.JTabbedPane TabbedPane_Nhanvien;
+    private javax.swing.JTabbedPane TabbedPane_hieuchinhdv;
+    private javax.swing.JButton button_suadv;
+    private javax.swing.JButton button_themdv;
+    private javax.swing.JButton button_xoadv;
+    private javax.swing.JLabel label_dongia;
+    private javax.swing.JLabel label_donvi;
+    private javax.swing.JLabel label_madv_xoa;
+    private javax.swing.JLabel label_tendv;
+    private javax.swing.JLabel label_tendv_xoa;
+    private javax.swing.JLabel label_vat;
+    private javax.swing.JPanel panel_canho;
+    private javax.swing.JPanel panel_dichvu;
+    private javax.swing.JPanel panel_themsuadv;
+    private javax.swing.JPanel panel_xoadv;
+    private javax.swing.JTable table_canho;
+    private javax.swing.JTable table_dichvu;
+    private javax.swing.JTextField text_dongia;
+    private javax.swing.JTextField text_donvi;
+    private javax.swing.JTextField text_madv_xoa;
+    private javax.swing.JTextField text_tendv;
+    private javax.swing.JTextField text_vat;
+    // End of variables declaration//GEN-END:variables
+
+    private void layDichVu() {
+        DefaultTableModel dtm = (DefaultTableModel) table_dichvu.getModel();
+        dtm.setNumRows(0); //Xóa dữ liệu cũ trên table để trống hiện thị lại dữ liệu mới.
+        Connection ketNoi = KetNoiDB.KetNoi();
+        String sql = "select * from DICH_VU";
+        Vector vt = null;
+        try {   
+            //PreparedStatement ps = ketNoi.prepareStatement(sql);
+            //ResultSet rs = ps.executeQuery();
+            Statement ps = ketNoi.createStatement();
+            ResultSet rs = ps.executeQuery(sql);
+            while (rs.next()) {
+                vt = new Vector();
+                vt.add(rs.getString("ma_dich_vu"));
+                vt.add(rs.getString("ten_dich_vu"));
+                vt.add(rs.getString("vat"));
+                vt.add(rs.getString("don_gia"));
+                vt.add(rs.getString("don_vi"));
+                dtm.addRow(vt);
+            }
+            table_dichvu.setModel(dtm);
+            rs.close();
+            ps.close();
+            ketNoi.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Loi khi doc du lieu");
+        }
+    }
+
+    private void layCanHo() {
+        DefaultTableModel dtm = (DefaultTableModel) table_canho.getModel();
+        dtm.setNumRows(0); //Xóa dữ liệu cũ trên table để trống hiện thị lại dữ liệu mới.
+        Connection ketNoi = KetNoiDB.KetNoi();
+        
+        String sql = "select ca.ma_can_ho, ca.dien_tich, ca.ma_chu_so_huu, ch.ho_ten, ca.khu, ca.tang \n" +
+                        "from CAN_HO as ca\n" +
+                        "join CHU_SO_HUU as ch\n" +
+                        "on ca.ma_chu_so_huu = ch.ma_chu_so_huu";
+        
+        Vector vt = null;
+        try {   
+            //PreparedStatement ps = ketNoi.prepareStatement(sql);
+            //ResultSet rs = ps.executeQuery();
+            Statement ps = ketNoi.createStatement();
+            ResultSet rs = ps.executeQuery(sql);
+            while (rs.next()) {
+                vt = new Vector();
+                vt.add(rs.getString("ma_can_ho"));
+                vt.add(rs.getString("dien_tich"));
+                vt.add(rs.getString("ma_chu_so_huu"));
+                vt.add(rs.getString("ho_ten"));
+                vt.add(rs.getString("khu"));
+                vt.add(rs.getString("tang"));
+                dtm.addRow(vt);
+            }
+            table_canho.setModel(dtm);
+            rs.close();
+            ps.close();
+            ketNoi.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Loi khi doc du lieu");
+        }
+    }
+    
+    private void layDataComboBox() {
+        Connection ketNoi = KetNoiDB.KetNoi();
+        
+        String sql = "select ten_dich_vu from DICH_VU";
+        try {   
+            //PreparedStatement ps = ketNoi.prepareStatement(sql);
+            //ResultSet rs = ps.executeQuery();
+            Statement ps = ketNoi.createStatement();
+            ResultSet rs = ps.executeQuery(sql);
+            while (rs.next()) {
+                ComboBox_tendv_xoa.addItem(rs.getString("ten_dich_vu"));
+            }
+            ComboBox_tendv_xoa.setSelectedIndex(-1);
+            rs.close();
+            ps.close();
+            ketNoi.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Loi khi doc du lieu");
+        }
+    }
 }
